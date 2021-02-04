@@ -1,0 +1,17 @@
+####################################
+#
+#   D I S N E Y 
+#
+#   Sample config
+#
+#   In addition to all the other config info your server block
+#   will need to provide a proxy for ther /api endpoint.
+# 
+#   If the disney service is listening on port 3000, then a
+#   component such as the following would be a good start.
+#
+####################################
+
+location /api {
+        proxy_pass http://SERVICE_IP_ADDRESS:3000;
+}

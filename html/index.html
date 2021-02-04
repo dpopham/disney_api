@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Darren's Disney API App - A Work In Progress</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        .body {
+            font-family: "Montserrat","Helvetica Neue","Helvetica","Arial",sans-serif;
+        }
+        .column1, .column2, .urldiv {
+              border-style: solid;
+              border-width: 1px;
+              border-color: black;
+              padding:5px 5px 5px 5px;
+        }
+        .urldiv {
+            width: 90%;
+        }
+        .column1 {
+              width: 30%;
+              float: left;
+        }
+        .column2 {
+              width: 65%;
+              float: left;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+              content: "";
+              display: table;
+              clear: both;
+        }
+        </style>
+    </head>
+    <body class="body">
+        <h2 class='title'>Darren's Disney API App - A Work In Progress</h2>
+        <div id="homelink">Learn more from <a href="https://darrenpopham.com">Darren's Website</a></div>
+        <p>
+        <div id="intro" style="display:block;">
+            There are many great plugins that people have made for accessing the Disney APIs.  Some of these
+            include a plugin for node, the <a href="https://github.com/cubehouse/themeparks" target="_blank">themeparks plugin</a>, written by Cubehouse
+            and the python <a href="https://github.com/scaratozzolo/MouseTools" target="_blank">Mousetools</a> module from Scaratozzolo.
+            <p>
+            However when I wanted to explore the plugins for my own purposes, a limitation I ran into was that I
+            had to keep deep-diving into their internal data structures and processes to figure out the data I needed.
+            <p>
+            Being the person that I am this did not sit well as I felt there was a simple component missing from these projects
+            that would make them so much nicer to interact with: a restful server implementation.
+            <p>
+            For this experiment I started with Cubehouse's node implementation and wrapped it into a restful service that I
+            could then reliably interact with.  I skipped all the other parks that it supports and focused on only its support for
+            the Disney parks.
+            <p>
+            There is no right or wrong way as to how to build a RESTful API or the response structures that it returns,
+            there is just opinion.  So this experiment is a work in progress subject to change at any time I feel like expressing
+            my opinion of a restful API for such a service. It is kind-of HATEOS in its structure, kind-of unique for some of the
+            API endpoints.
+            <p>
+            If you like it cool.  If not, oh well, go write your own.
+            <p>
+            If your browser supports parsing of JSON and converting links into clickable objects then interacting
+            with the API directly should work. It is located at 
+            Darren's Disney API Test Link: <a href=https://disney.darrenpopham.com/api>https://disney.darrenpopham.com/api</a>
+            <p>
+            If your browser doesn't parse JSON into a useable format then I am also working on a Swagger doc located at
+            <a href=https://disney.darrenpopham.com/api-docs/>https://disney.darrenpopham.com/api-docs/</a>
+
+        </div>
+    </body>
+</html>
+

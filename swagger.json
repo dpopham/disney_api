@@ -1,0 +1,581 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Darren's Disney API Experiment",
+        "description": "A restful API service wrapping the popular Themeparks module",
+        "version": "1.0.0",
+        "contact": {
+            "name": "Darren Popham",
+            "url": "https://darrenpopham.com",
+            "email": "darren@darrenpopham.com"
+       }
+    },
+    "host": "disney.darrenpopham.com",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Disney",
+            "description": "API for Disney information",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "https://disney.darrenpopham.com"
+            }
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Get entry level response",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Root"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks": {
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve list of Disney parks",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Parks"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks/{park_id}": {
+            "parameters": [
+                {
+                    "name": "park_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested Disney Park",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve info on a specific Disney park",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Parks"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks/{park_id}/operating_hours": {
+            "parameters": [
+                {
+                    "name": "park_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested Disney Park",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve the known operating hours (by this application) for a specific Disney park",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ParkHours"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks/{park_id}/operating_hours/{date}": {
+            "parameters": [
+                {
+                    "name": "park_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested Disney Park",
+                    "type": "string"
+                },
+                {
+                    "name": "date",
+                    "in": "path",
+                    "required": true,
+                    "description": "The date to use when requesting operating hours",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve the operating hours for one date (if known) of a specific Disney park",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ParkHours"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks/{park_id}/rides": {
+            "parameters": [
+                {
+                    "name": "park_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested Disney Park",
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "in": "query",
+                    "required": false,
+                    "description": "Filter by specified ride type",
+                    "type": "string",
+                    "enum": ["Operating", "Closed", "Refurbishment", "Down"]
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve the known rides for a specific Disney park",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ParkRides"
+                        }
+                    }
+                }
+            }
+        },
+        "/parks/{park_id}/rides/{ride_id}": {
+            "parameters": [
+                {
+                    "name": "park_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested Disney Park",
+                    "type": "string"
+                },
+                {
+                    "name": "ride_id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of requested ride",
+                    "type": "string"
+                },
+                {
+                    "name": "status",
+                    "in": "query",
+                    "required": false,
+                    "description": "Filter by specified ride type",
+                    "type": "string",
+                    "enum": ["Operating", "Closed", "Refurbishment", "Down"]
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Disney"
+                ],
+                "summary": "Retrieve the known rides for a specific Disney park",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ParkRides"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+
+    "definitions": {
+        "Root": {
+            "properties": {
+                "_links": {
+                    "type": "object",
+                    "properties": {
+                        "this": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "_embedded": {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "_links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "parks": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "count" : {
+                    "type": "integer"
+                },
+                "total" : {
+                    "type": "integer"
+                },
+                "now": {
+                    "type": "string"
+                },
+                "disclaimer" : {
+                    "type": "string"
+                },
+                "moreinfo" : {
+                    "type": "string"
+                }
+            }   
+        },
+        "Parks": {
+            "properties": {
+                "_links": {
+                    "type": "object",
+                    "properties": {
+                        "this": {
+                            "type": "string"
+                        },
+                        "parent": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "_embedded": {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "parkid": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "number"
+                                    },
+                                    "longitude": {
+                                        "type": "number"
+                                    },
+                                    "fastpass": {
+                                        "type": "boolean"
+                                    },
+                                    "_links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "googlemaps": {
+                                                "type": "string"
+                                            },
+                                            "operatinghours": {
+                                                "type": "string"
+                                            },
+                                            "rides": {
+                                                "type": "object",
+                                                "properties" : {
+                                                    "all": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating": {
+                                                        "type": "string"
+                                                    },
+                                                    "closed": {
+                                                        "type": "string"
+                                                    },
+                                                    "refurbishment": {
+                                                        "type": "string"
+                                                    },
+                                                    "down": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "this": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "count" : {
+                    "type": "integer"
+                },
+                "total" : {
+                    "type": "integer"
+                },
+                "now": {
+                    "type": "string"
+                },
+                "disclaimer" : {
+                    "type": "string"
+                },
+                "moreinfo" : {
+                    "type": "string"
+                }
+            }   
+        },
+
+        "ParkHours": {
+            "properties": {
+                "_links": {
+                    "type": "object",
+                    "properties": {
+                        "this": {
+                            "type": "string"
+                        },
+                        "parent": {
+                            "type": "string"
+                        },
+                        "parks": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "_embedded": {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "parkid": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "openingtime": {
+                                        "type": "string"
+                                    },
+                                    "closingtime": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "_links": {
+                                        "type": "object",
+                                        "properties": {
+                                            "park": {
+                                                "type": "string"
+                                            },
+                                            "rides": {
+                                                "type": "object",
+                                                "properties" : {
+                                                    "all": {
+                                                        "type": "string"
+                                                    },
+                                                    "operating": {
+                                                        "type": "string"
+                                                    },
+                                                    "closed": {
+                                                        "type": "string"
+                                                    },
+                                                    "refurbishment": {
+                                                        "type": "string"
+                                                    },
+                                                    "down": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "this": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "count" : {
+                    "type": "integer"
+                },
+                "total" : {
+                    "type": "integer"
+                },
+                "now": {
+                    "type": "string"
+                },
+                "disclaimer" : {
+                    "type": "string"
+                },
+                "moreinfo" : {
+                    "type": "string"
+                }
+            }   
+        },
+
+
+        "ParkRides": {
+            "properties": {
+                "_links": {
+                    "type": "object",
+                    "properties": {
+                        "this": {
+                            "type": "string"
+                        },
+                        "parent": {
+                            "type": "string"
+                        },
+                        "parks": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "_embedded": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "active": {
+                            "type": "boolean"
+                        },
+                        "waitTime": {
+                            "type": "integer"
+                        },
+                        "fastPass": {
+                            "type": "boolean"
+                        },
+                        "lastUpdate": {
+                            "type": "string"
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": ["Operating", "Closed", "Refurbishment", "Down"]
+                        },
+                        "latitude": {
+                            "type": "number"
+                        },
+                        "longitude": {
+                            "type": "number"
+                        },
+                        "type": {
+                            "type": "string"
+                        },
+                        "_links": {
+                            "type": "object",
+                            "properties": {
+                                "park": {
+                                    "type": "string"
+                                },
+                                "operating_hours": {
+                                    "type": "string"
+                                },
+                                "rides": {
+                                    "type": "object",
+                                    "properties" : {
+                                        "all": {
+                                            "type": "string"
+                                        },
+                                        "operating": {
+                                            "type": "string"
+                                        },
+                                        "closed": {
+                                            "type": "string"
+                                        },
+                                        "refurbishment": {
+                                            "type": "string"
+                                        },
+                                        "down": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "googlemaps": {
+                                    "type": "string"
+                                },
+                                "this": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "count" : {
+                    "type": "integer"
+                },
+                "total" : {
+                    "type": "integer"
+                },
+                "now": {
+                    "type": "string"
+                },
+                "disclaimer" : {
+                    "type": "string"
+                },
+                "moreinfo" : {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

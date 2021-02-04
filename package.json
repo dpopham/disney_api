@@ -1,0 +1,26 @@
+{
+  "name": "disney",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-hateoas-links": "^1.1.4",
+    "moment-timezone": "^0.5.31",
+    "morgan": "^1.10.0",
+    "random-useragent": "^0.5.0",
+    "sqlite": "^4.0.17",
+    "sqlite3": "^5.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "themeparks": "^5.1.44",
+    "winston": "^3.3.3",
+    "yauzl": "^2.10.0"
+  }
+}
