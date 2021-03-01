@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Darren's Disney API Experiment",
-        "description": "A restful API service wrapping the popular Themeparks module",
+        "description": "A restful API service wrapping the popular Themeparks module.<br>Github link: <a href='https://github.com/dpopham/disney_api'>https://github.com/dpopham/disney_api</a>",
         "version": "1.0.0",
         "contact": {
             "name": "Darren Popham",

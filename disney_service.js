@@ -139,6 +139,7 @@ function make_footer(size) {
         "total": size,
         "now": d.toISOString(),
         "disclaimer": "Web Service © 2020 Darren Popham",
+        "github": "https://github.com/dpopham/disney_api",
         "moreinfo": site
     }
 }
